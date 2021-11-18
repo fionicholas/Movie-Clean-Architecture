@@ -1,7 +1,9 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv_show/popular_tv_shows_notifier.dart';
+import 'package:ditonton/presentation/bloc/tv_show/popular/popular_tv_show_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_show/popular/popular_tv_show_event.dart';
+import 'package:ditonton/presentation/bloc/tv_show/popular/popular_tv_show_state.dart';
 import 'package:ditonton/presentation/widgets/tv_show_card_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class PopularTvShowsPage extends StatefulWidget {
@@ -15,9 +17,7 @@ class _PopularTvShowsPageState extends State<PopularTvShowsPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<PopularTvShowsNotifier>(context, listen: false)
-            .fetchPopularTvShows());
+    context.read<PopularTvShowBloc>().add(FetchedPopularTvShow());
   }
 
   @override
@@ -28,24 +28,33 @@ class _PopularTvShowsPageState extends State<PopularTvShowsPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvShowsNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
+        child: BlocBuilder<PopularTvShowBloc, PopularTvShowState>(
+          builder: (context, state) {
+            if (state is PopularTvShowLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final tvShow = data.tvShows[index];
-                  return TvShowCard(tvShow);
-                },
-                itemCount: data.tvShows.length,
+            } else if (state is PopularTvShowHasData) {
+              final result = state.result;
+              return Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemBuilder: (context, index) {
+                    final TvShow = result[index];
+                    return TvShowCard(TvShow);
+                  },
+                  itemCount: result.length,
+                ),
+              );
+            } else if (state is PopularTvShowError) {
+              return Expanded(
+                child: Center(
+                  child: Text(state.message),
+                ),
               );
             } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
+              return Expanded(
+                child: Container(),
               );
             }
           },

@@ -14,7 +14,7 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     this._getPopularMovies,
     this._getNowPlayingMovies,
     this._getTopRatedMovies,
-  ) : super(PopularMovieEmpty());
+  ) : super(MovieListEmpty());
 
   @override
   Stream<MovieListState> mapEventToState(

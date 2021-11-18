@@ -8,8 +8,6 @@ abstract class MovieListState extends Equatable {
   List<Object> get props => [];
 }
 
-class NowPlayingMovieEmpty extends MovieListState {}
-
 class NowPlayingMovieLoading extends MovieListState {}
 
 class NowPlayingMovieError extends MovieListState {
@@ -30,7 +28,7 @@ class NowPlayingMovieHasData extends MovieListState {
   List<Object> get props => [result];
 }
 
-class PopularMovieEmpty extends MovieListState {}
+class MovieListEmpty extends MovieListState {}
 
 class PopularMovieLoading extends MovieListState {}
 
@@ -51,8 +49,6 @@ class PopularMovieHasData extends MovieListState {
   @override
   List<Object> get props => [result];
 }
-
-class TopRatedMovieEmpty extends MovieListState {}
 
 class TopRatedMovieLoading extends MovieListState {}
 
