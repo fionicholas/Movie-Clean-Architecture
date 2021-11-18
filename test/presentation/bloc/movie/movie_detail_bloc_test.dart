@@ -16,7 +16,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../provider/movie/movie_detail_notifier_test.mocks.dart';
+import 'movie_detail_bloc_test.mocks.dart';
 
 @GenerateMocks([
   GetMovieDetail,
@@ -82,13 +82,6 @@ void main() {
     title: 'title',
     voteAverage: 1,
     voteCount: 1,
-  );
-
-  final testWatchlistMovie = Movie.watchlist(
-    id: 1,
-    title: 'title',
-    posterPath: 'posterPath',
-    overview: 'overview',
   );
 
   const watchlistAddSuccessMessage = 'Added to Watchlist';
