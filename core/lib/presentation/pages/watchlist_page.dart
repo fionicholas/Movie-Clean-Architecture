@@ -1,10 +1,11 @@
-import 'package:core/utils/constants.dart';
 import 'package:core/presentation/pages/tv_show/watch_list_tv_show_page.dart';
+import 'package:core/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'movie/watch_list_movie_page.dart';
 
 class WatchlistPage extends StatefulWidget {
+  const WatchlistPage({Key? key}) : super(key: key);
 
   @override
   _WatchlistPageState createState() => _WatchlistPageState();
@@ -14,17 +15,17 @@ class _WatchlistPageState extends State<WatchlistPage>
     with TickerProviderStateMixin {
   late TabController _controller;
 
-  List<Widget> _tapList = [
-    Tab(
+  final List<Widget> _tapList = [
+    const Tab(
       text: 'Movie',
     ),
-    Tab(
+    const Tab(
       text: 'Tv Show',
     ),
   ];
   final List<Widget> _children = [
-    WatchListMoviePage(),
-    WatchListTvShowPage(),
+    const WatchListMoviePage(),
+    const WatchListTvShowPage(),
   ];
 
   @override
@@ -38,7 +39,7 @@ class _WatchlistPageState extends State<WatchlistPage>
     return Scaffold(
       backgroundColor: kOxfordBlue,
       appBar: AppBar(
-        title: Text('Watchlist'),
+        title: const Text('Watchlist'),
         bottom: TabBar(
           indicatorColor: Colors.white,
           controller: _controller,

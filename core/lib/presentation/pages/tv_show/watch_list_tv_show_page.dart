@@ -22,31 +22,37 @@ class WatchListTvShowPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is WatchlistTvShowLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state is WatchlistTvShowHasData) {
             final result = state.result;
-            return Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemBuilder: (context, index) {
-                  final TvShow = result[index];
-                  return TvShowCard(TvShow);
-                },
-                itemCount: result.length,
-              ),
-            );
+            if (result.isEmpty) {
+              return const Center(
+                child: Text('Data tidak ditemukan'),
+              );
+            } else {
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemBuilder: (context, index) {
+                        final tvShow = result[index];
+                        return TvShowCard(tvShow);
+                      },
+                      itemCount: result.length,
+                    ),
+                  ),
+                ],
+              );
+            }
           } else if (state is WatchlistTvShowError) {
-            return Expanded(
-              child: Center(
-                child: Text(state.message),
-              ),
+            return Center(
+              child: Text(state.message),
             );
           } else {
-            return Expanded(
-              child: Container(),
-            );
+            return Container();
           }
         },
       ),

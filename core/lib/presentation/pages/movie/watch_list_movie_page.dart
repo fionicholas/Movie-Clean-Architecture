@@ -22,31 +22,37 @@ class WatchListMoviePage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is WatchlistMovieLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state is WatchlistMovieHasData) {
             final result = state.result;
-            return Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemBuilder: (context, index) {
-                  final movie = result[index];
-                  return MovieCard(movie);
-                },
-                itemCount: result.length,
-              ),
-            );
+            if (result.isEmpty) {
+              return const Center(
+                child: Text('Data tidak ditemukan'),
+              );
+            } else {
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemBuilder: (context, index) {
+                        final movie = result[index];
+                        return MovieCard(movie);
+                      },
+                      itemCount: result.length,
+                    ),
+                  ),
+                ],
+              );
+            }
           } else if (state is WatchlistMovieError) {
-            return Expanded(
-              child: Center(
-                child: Text(state.message),
-              ),
+            return Center(
+              child: Text(state.message),
             );
           } else {
-            return Expanded(
-              child: Container(),
-            );
+            return Container();
           }
         },
       ),
