@@ -11,42 +11,44 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
-  int _currentIndex = 0;
-  final List _children = [
+class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
+  late TabController _controller;
+
+  List<Widget> _tapList = [
+    Tab(
+      text: 'Movie',
+    ),
+    Tab(
+      text: 'Tv Show',
+    ),
+  ];
+  final List<Widget> _children = [
     SearchMoviePage(),
     SearchTvShowPage(),
   ];
 
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _controller = TabController(length: _tapList.length, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kOxfordBlue,
-        appBar: AppBar(
-          title: Text('Search'),
+      backgroundColor: kOxfordBlue,
+      appBar: AppBar(
+        title: Text('Search'),
+        bottom: TabBar(
+          indicatorColor: Colors.white,
+          controller: _controller,
+          tabs: _tapList,
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: kRichBlack,
-          onTap: onTabTapped, // new
-          currentIndex: _currentIndex,
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.movie),
-              label: 'Movie',
-            ),
-            BottomNavigationBarItem(
-              activeIcon: Icon(Icons.tv_rounded),
-              icon: new Icon(Icons.tv_rounded),
-              label: 'Tv Show',
-            ),
-          ],
-        ),
-        body: _children[_currentIndex]);
+      ),
+      body: TabBarView(
+        controller: _controller,
+        children: _children
+      ),
+    );
   }
 }
