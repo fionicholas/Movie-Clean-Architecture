@@ -1,10 +1,10 @@
-import 'package:dartz/dartz.dart';
 import 'package:core/domain/entities/tv_show.dart';
-import 'package:core/domain/usecases/tv_show/search_tv_shows.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:search/domain/usecases/search_tv_shows.dart';
 
-import '../../../helpers/test_helper.mocks.dart';
+import '../../../../core/test/helpers/test_helper.mocks.dart';
 
 void main() {
   late SearchTvShows useCase;
@@ -16,7 +16,7 @@ void main() {
   });
 
   final tvShows = <TvShow>[];
-  final tQuery = 'Spiderman';
+  const tQuery = 'Spiderman';
 
   test('should get list of tv show from the repository', () async {
     // arrange

@@ -1,8 +1,8 @@
 import 'package:core/utils/constants.dart';
-import 'package:core/presentation/pages/tv_show/search_tv_show_page.dart';
+import 'search_tv_show_page.dart';
 import 'package:flutter/material.dart';
 
-import 'movie/search_movie_page.dart';
+import 'search_movie_page.dart';
 
 class SearchPage extends StatefulWidget {
 

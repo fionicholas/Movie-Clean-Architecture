@@ -55,6 +55,8 @@ dev_dependencies:
     path: about
   core:
     path: core
+  search:
+    path: search
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
