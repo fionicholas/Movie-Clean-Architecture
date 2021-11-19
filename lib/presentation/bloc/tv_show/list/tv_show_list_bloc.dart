@@ -14,7 +14,7 @@ class TvShowListBloc extends Bloc<TvShowListEvent, TvShowListState> {
     this._getPopularTvShows,
     this._getNowPlayingTvShows,
     this._getTopRatedTvShows,
-  ) : super(PopularTvShowListEmpty());
+  ) : super(TvShowListEmpty());
 
   @override
   Stream<TvShowListState> mapEventToState(

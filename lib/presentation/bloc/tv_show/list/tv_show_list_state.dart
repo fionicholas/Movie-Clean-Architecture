@@ -8,8 +8,6 @@ abstract class TvShowListState extends Equatable {
   List<Object> get props => [];
 }
 
-class NowPlayingTvShowListEmpty extends TvShowListState {}
-
 class NowPlayingTvShowListLoading extends TvShowListState {}
 
 class NowPlayingTvShowListError extends TvShowListState {
@@ -30,7 +28,7 @@ class NowPlayingTvShowListHasData extends TvShowListState {
   List<Object> get props => [result];
 }
 
-class PopularTvShowListEmpty extends TvShowListState {}
+class TvShowListEmpty extends TvShowListState {}
 
 class PopularTvShowListLoading extends TvShowListState {}
 
@@ -51,8 +49,6 @@ class PopularTvShowListHasData extends TvShowListState {
   @override
   List<Object> get props => [result];
 }
-
-class TopRatedTvShowListEmpty extends TvShowListState {}
 
 class TopRatedTvShowListLoading extends TvShowListState {}
 
