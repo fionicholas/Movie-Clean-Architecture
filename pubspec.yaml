@@ -41,6 +41,8 @@ dependencies:
   flutter_bloc: ^7.2.0
   rxdart: ^0.27.2
   fluttertoast: ^8.0.8
+  firebase_core: ^1.6.0
+  firebase_crashlytics: ^2.2.5
 
 dev_dependencies:
   mockito: ^5.0.8
@@ -48,6 +50,11 @@ dev_dependencies:
   bloc_test: ^8.0.0
   flutter_test:
     sdk: flutter
+
+  about:
+    path: about
+  core:
+    path: core
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
